@@ -1,17 +1,23 @@
+import { useContext } from "react";
+import PropTypes from 'prop-types'
 import { useLocation } from "react-router-dom";
 
-import styles from './styles/Header.module.css'
-import Button from './Button';
-import PropTypes from 'prop-types'
+import { GlobalContext } from "../context/GlobalContext";
 
-const Header = ({ title, toggleForm, showForm }) => {
+import './styles/Header.module.css'
+import Button from './Button';
+
+const Header = ({ title }) => {
+    const { showForm, setShowForm } = useContext(GlobalContext);
     const location = useLocation();
+    
     return(
         <header>
             <h1>{ title }</h1>
             {
                 location.pathname === '/' &&
-                <Button text={ showForm ? 'Close' : 'Add Task' } color={ showForm ? 'red' : 'green' } btnClick={ toggleForm } />}
+                <Button text={ showForm ? 'Close' : 'Add Task' } color={ showForm ? 'red' : 'green' } btnClick={ setShowForm } />
+            }
         </header>
     )
 };

@@ -2,9 +2,9 @@
   "tasks": [
     {
       "text": "Go to Office",
-      "day": "Monday 1st August at 10:00 AM",
-      "reminder": "on",
-      "id": 3
+      "day": "Saturday 27th August",
+      "reminder": true,
+      "id": 1
     }
   ]
 }
