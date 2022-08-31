@@ -1,28 +1,43 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './styles/AddTask.module.css';
 
-const AddTask = ({ addTask }) => {
- const [ form, setForm ] = useState({
-    text: '',
-    day: '',
-    reminder: false
- })
-
- const handleSubmit = (e) => {
-    e.preventDefault();
-    if(!form.text || !form.day){
-        alert('please fill all the fields');
-        return;
-    }
-
-    addTask(form);
-
-    setForm({
+const AddTask = () => {
+    const [ form, setForm ] = useState({
         text: '',
         day: '',
         reminder: false
     })
- }
+
+    const disptach = useDispatch();
+
+    const addTask = async (task) => {
+        const response = await fetch('/tasks', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(task)
+        });
+        const newTask = await response.json();
+        disptach({ type: 'ADD_TASK', payload: newTask });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(!form.text || !form.day){
+            alert('please fill all the fields');
+            return;
+        }
+
+        addTask(form);
+
+        setForm({
+            text: '',
+            day: '',
+            reminder: false
+        })
+    }
   return (
     <form onSubmit={handleSubmit} className={styles.add_form}>
         <div className={styles.form_control}>

@@ -1,10 +1,17 @@
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './styles/Header.module.css'
+import './styles/Header.module.css'
 import Button from './Button';
 import PropTypes from 'prop-types'
 
-const Header = ({ title, toggleForm, showForm }) => {
+const Header = ({ title }) => {
+    const dispatch = useDispatch();
+    const showForm = useSelector(store => store.showForm);
+
+    const toggleForm = () => {
+        dispatch({ type: 'TOGGLE_FORM' });
+    }
     const location = useLocation();
     return(
         <header>

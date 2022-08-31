@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import About from './pages/About';
@@ -8,18 +7,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function App() {
-  const [showForm, setShowForm] = useState(false);
-
-  const toggleForm = () => {
-    setShowForm( prev => !prev );
-  }
 
   return (
     <div className="container">
       <BrowserRouter>
-        <Header title="Task Tracker" toggleForm={ toggleForm }  showForm={showForm}/>
+        <Header title="Task Tracker"/>
             <Routes>
-                <Route path="/" element={ <Home showForm={showForm}/> }></Route>
+                <Route path="/" element={ <Home/> }></Route>
                 <Route path="/about" element={ <About/> }></Route>
             </Routes>
         <Footer />
